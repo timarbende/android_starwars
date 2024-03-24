@@ -44,6 +44,15 @@ class ListScreenViewModel @AssistedInject constructor(
                     }
                 }
 
+                ContentType.StarShips -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            data = MockRepository.getStarShips()
+                        )
+                    }
+                }
+
                 else -> {}
             }
         }
