@@ -15,6 +15,11 @@ class MockRepository{
             return mockStarShips
         }
 
+        suspend fun getPlanets(): List<BaseModel>{
+            delay(3000)
+            return mockPlanets
+        }
+
         private val mockCharacters: List<BaseModel> = listOf(
             BaseModel("A Skywalker", 5),
             BaseModel("B Skywalker", 6),
@@ -32,5 +37,16 @@ class MockRepository{
             BaseModel("Eillenium Falcon", 3),
             BaseModel("Fillenium Falcon", 100000),
         )
+
+        private val mockPlanets: List<BaseModel> = listOf(
+            BaseModel("Tatooine", 5),
+            BaseModel("Batooine", 6),
+            BaseModel("Catooine", 1),
+            BaseModel("Datooine", 0),
+            BaseModel("Eatooine", 3),
+            BaseModel("Fatooine", 100000),
+        )
+
+
     }
 }
