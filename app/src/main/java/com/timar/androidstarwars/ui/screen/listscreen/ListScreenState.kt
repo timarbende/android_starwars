@@ -1,8 +1,8 @@
-package com.timar.androidstarwars.ui.components.List
+package com.timar.androidstarwars.ui.screen.listscreen
 
 import com.timar.androidstarwars.domain.model.BaseModel
 
-data class StarWarsListState (
+data class ListScreenState (
     val data: List<BaseModel> = emptyList(),
     val isLoading: Boolean = false
 )
