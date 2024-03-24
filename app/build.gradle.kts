@@ -80,6 +80,12 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 }
 
+apollo {
+    service("service") {
+        packageName.set("com.timar")
+    }
+}
+
 kapt {
     correctErrorTypes = true
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.timar.androidstarwars.data.MockRepository
+import com.timar.androidstarwars.domain.network.StarWarsClient
 import com.timar.androidstarwars.ui.util.ContentType
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = ListScreenViewModel.ListScreenViewModelFactory::class)
 class ListScreenViewModel @AssistedInject constructor(
-    @Assisted val contentType: ContentType
+    @Assisted val contentType: ContentType,
+    private val swapiClient: StarWarsClient
 ): ViewModel() {
     private val _state = MutableStateFlow(ListScreenState())
     val state = _state.asStateFlow()
@@ -39,7 +41,7 @@ class ListScreenViewModel @AssistedInject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            data = MockRepository.getCharacters()
+                            data = swapiClient.getCharactersList()
                         )
                     }
                 }
@@ -48,7 +50,7 @@ class ListScreenViewModel @AssistedInject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            data = MockRepository.getStarShips()
+                            data = swapiClient.getStarShipsList()
                         )
                     }
                 }
@@ -57,7 +59,7 @@ class ListScreenViewModel @AssistedInject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            data = MockRepository.getPlanets()
+                            data = swapiClient.getPlanetsList()
                         )
                     }
                 }

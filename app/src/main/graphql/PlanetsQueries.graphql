@@ -1,0 +1,11 @@
+query AllPlanetsQuery {
+    allPlanets {
+        planets {
+            id
+            name
+            filmConnection {
+                totalCount
+            }
+        }
+    }
+}
