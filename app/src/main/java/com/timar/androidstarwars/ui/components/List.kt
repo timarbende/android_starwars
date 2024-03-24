@@ -1,4 +1,4 @@
-package com.timar.androidstarwars.ui.components.List
+package com.timar.androidstarwars.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -8,17 +8,16 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.timar.androidstarwars.R
 import com.timar.androidstarwars.domain.model.BaseModel
-import com.timar.androidstarwars.ui.components.StarWarsListItem
 
 @Composable
 fun StarWarsList(
-    state: StarWarsListState,
+    data: List<BaseModel>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(state.data){ baseModel->
+        items(data) { baseModel ->
             StarWarsListItem(
                 title = baseModel.name,
                 subtitle = pluralStringResource(
@@ -34,13 +33,11 @@ fun StarWarsList(
 @Preview(device = "spec:width=1080px,height=1080px")
 @Composable
 private fun StarWarsListPreview() {
-    val state = StarWarsListState(
-        data = List(10){
-            BaseModel(
-                name = it.toString(),
-                numberOfFilmReferences = it
-            )
-        }
-    )
-    StarWarsList(state = state)
+    val data = List(10) {
+        BaseModel(
+            name = it.toString(),
+            numberOfFilmReferences = it
+        )
+    }
+    StarWarsList(data = data)
 }
