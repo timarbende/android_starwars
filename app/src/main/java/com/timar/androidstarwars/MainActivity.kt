@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ListScreen(contentType = ContentType.Planets)
+                    ListScreen(contentType = ContentType.Characters)
                 }
             }
         }
