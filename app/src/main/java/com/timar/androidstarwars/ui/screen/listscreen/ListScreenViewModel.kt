@@ -53,7 +53,14 @@ class ListScreenViewModel @AssistedInject constructor(
                     }
                 }
 
-                else -> {}
+                ContentType.Planets -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            data = MockRepository.getPlanets()
+                        )
+                    }
+                }
             }
         }
     }
