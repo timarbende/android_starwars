@@ -2,6 +2,7 @@ package com.timar.androidstarwars.data.network
 
 import com.apollographql.apollo3.ApolloClient
 import com.timar.AllCharactersQuery
+import com.timar.AllPlanetsQuery
 import com.timar.AllStarShipsQuery
 import com.timar.androidstarwars.data.transformers.toBaseModelList
 import com.timar.androidstarwars.domain.model.BaseModel
@@ -31,6 +32,12 @@ class ApolloStarWarsClient(
     }
 
     override suspend fun getPlanetsList(): List<BaseModel> {
-        TODO("Not yet implemented")
+        return apolloClient
+            .query(AllPlanetsQuery())
+            .execute()
+            .data
+            ?.allPlanets
+            ?.toBaseModelList()
+            .orEmpty()
     }
 }
