@@ -1,0 +1,11 @@
+query AllStarShipsQuery {
+    allStarships {
+        starships {
+            id
+            name
+            filmConnection {
+                totalCount
+            }
+        }
+    }
+}
