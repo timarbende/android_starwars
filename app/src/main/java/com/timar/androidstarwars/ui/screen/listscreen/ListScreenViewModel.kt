@@ -50,7 +50,7 @@ class ListScreenViewModel @AssistedInject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            data = MockRepository.getStarShips()
+                            data = swapiClient.getStarShipsList()
                         )
                     }
                 }
