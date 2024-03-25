@@ -27,7 +27,7 @@ fun ListScreen(
         modifier = modifier
     ){
         Text(
-            text = contentType.toString(),
+            text = contentType.getReadable(),
             style = MaterialTheme.typography.displayMedium
         )
 

@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.timar.androidstarwars.domain.model.BaseModel
 import com.timar.androidstarwars.domain.network.StarWarsClient
+import com.timar.androidstarwars.ui.util.ContentType
+import com.timar.androidstarwars.ui.util.DetailsDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,10 +30,25 @@ class DetailsScreenViewModel @Inject constructor(
             )
         }
 
-        savedStateHandle.get<String>("itemId")?.let {id ->
-            Log.d("DetailsViewModel", id)
-            /*viewModelScope.launch {
-                val result = swapiClient.getCharacterDetails(id)
+        val contentType = savedStateHandle.get<ContentType>(DetailsDestination.contentTypeArgument)
+        val id = savedStateHandle.get<String>(DetailsDestination.itemIdArgument)
+
+        if(id != null && contentType != null) {
+
+
+            viewModelScope.launch {
+                var result: BaseModel? = null
+                when(contentType){
+                    ContentType.Characters -> {
+                        result = swapiClient.getCharacterDetails(id)
+                    }
+                    ContentType.StarShips -> {
+
+                    }
+                    ContentType.Planets -> {
+
+                    }
+                }
                 if (result != null) {
                     _state.update {
                         it.copy(
@@ -43,7 +61,7 @@ class DetailsScreenViewModel @Inject constructor(
                         isLoading = false,
                     )
                 }
-            }*/
+            }
         }
     }
 }

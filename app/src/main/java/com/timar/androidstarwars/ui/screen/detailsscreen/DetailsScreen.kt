@@ -13,20 +13,13 @@ import com.timar.androidstarwars.ui.util.ContentType
 @Composable
 fun DetailsScreen (
     viewModel: DetailsScreenViewModel = hiltViewModel(),
-    contentType: String,
 ) {
-    val contentType = ContentType.fromString(contentType)
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     Column {
         Text(
             "Mock Details Screen",
             style = MaterialTheme.typography.headlineLarge
-        )
-
-        Text(
-            "Content Type is $contentType",
-            style = MaterialTheme.typography.bodyMedium
         )
 
         Text(
@@ -39,7 +32,5 @@ fun DetailsScreen (
 @Preview(showBackground = true)
 @Composable
 private fun DetailsScreenPreview() {
-    DetailsScreen(
-        contentType = ContentType.Characters.toString()
-    )
+    DetailsScreen()
 }
