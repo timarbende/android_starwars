@@ -1,5 +1,11 @@
-query AllStarShipsQuery {
-    allStarships {
+query AllStarShipsQuery($after: String, $first: Int) {
+    allStarships(after: $after, first: $first) {
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
         starships {
             id
             name
