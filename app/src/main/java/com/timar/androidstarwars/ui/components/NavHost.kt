@@ -38,7 +38,7 @@ fun StarWarsNavHost(
         composable(
             route = DetailsDestination.routeWithArgs,
             arguments = DetailsDestination.arguments
-        ) { navBackStackEntry ->
+        ) {
             DetailsScreen()
         }
     }

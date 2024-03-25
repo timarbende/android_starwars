@@ -8,19 +8,20 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.timar.androidstarwars.data.local.LocalDatabase
-import com.timar.androidstarwars.data.transformers.toBaseModelEntity
+import com.timar.androidstarwars.data.local.character.CharacterEntity
+import com.timar.androidstarwars.data.transformers.toCharacterEntity
 import com.timar.androidstarwars.domain.network.StarWarsClient
 
-open class ApolloRemoteMediator<T: Any>(
+class CharacterRemoteMediator(
     private val localDatabase: LocalDatabase,
     private val swapi: StarWarsClient
-) : RemoteMediator<Int, T>() {
+) : RemoteMediator<Int, CharacterEntity>() {
 
     private var pageInfo: PageInfo? = null
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, T>
+        state: PagingState<Int, CharacterEntity>
     ): MediatorResult {
         var endCursor: String? = null
 
@@ -60,7 +61,7 @@ open class ApolloRemoteMediator<T: Any>(
             if (loadType == LoadType.REFRESH) {
                 localDatabase.characterDao.clearAll()
             }
-            val characterEntities = response.data.map { it.toBaseModelEntity() }
+            val characterEntities = response.data.map { it.toCharacterEntity() }
             localDatabase.characterDao.upsertCharacters(characterEntities)
         }
 

@@ -7,9 +7,9 @@ import com.timar.androidstarwars.domain.model.BaseModel
 interface StarWarsClient {
     suspend fun getCharactersList(pageInfo: PageInfo): BaseDto
 
-    suspend fun getStarShipsList(): List<BaseModel>
+    suspend fun getStarShipsList(pageInfo: PageInfo): BaseDto
 
-    suspend fun getPlanetsList(): List<BaseModel>
+    suspend fun getPlanetsList(pageInfo: PageInfo): BaseDto
 
     suspend fun getCharacterDetails(id: String): BaseModel?
 

@@ -36,20 +36,20 @@ fun ListScreen(
     },
     onListItemClick: (BaseModel) -> Unit,
 ) {
-    val characters = viewModel.pagingFlow.collectAsLazyPagingItems()
+    val pagingItems = viewModel.pagingFlow.collectAsLazyPagingItems()
 
     val context = LocalContext.current
-    LaunchedEffect(key1 = characters.loadState) {
-        if (characters.loadState.refresh is LoadState.Error) {
+    LaunchedEffect(key1 = pagingItems.loadState) {
+        if (pagingItems.loadState.refresh is LoadState.Error) {
             Toast.makeText(
                 context,
-                "Error: ${(characters.loadState.refresh as LoadState.Error).error.message}",
+                "Error: ${(pagingItems.loadState.refresh as LoadState.Error).error.message}",
                 Toast.LENGTH_LONG
             ).show()
         }
     }
 
-    if (characters.loadState.refresh is LoadState.Loading) {
+    if (pagingItems.loadState.refresh is LoadState.Loading) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -75,7 +75,7 @@ fun ListScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         StarWarsList(
-            data = characters,
+            data = pagingItems,
             onListItemClick = onListItemClick
         )
     }

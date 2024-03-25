@@ -36,24 +36,38 @@ class ApolloStarWarsClient(
         )
     }
 
-    override suspend fun getStarShipsList(): List<BaseModel> {
-        return apolloClient
-            .query(AllStarShipsQuery())
+    override suspend fun getStarShipsList(pageInfo: PageInfo): BaseDto {
+        val result =  apolloClient
+            .query(AllStarShipsQuery(
+                after = if(pageInfo.endCursor != null) Optional.Present(pageInfo.endCursor)
+                else Optional.absent(),
+                first = Optional.Present(pageSize),
+            ))
             .execute()
             .data
             ?.allStarships
-            ?.toBaseModelList()
-            .orEmpty()
+
+        return BaseDto(
+            pageInfo = result?.pageInfo?.toPageInfo() ?: PageInfo(),
+            data = result?.toBaseModelList().orEmpty()
+        )
     }
 
-    override suspend fun getPlanetsList(): List<BaseModel> {
-        return apolloClient
-            .query(AllPlanetsQuery())
+    override suspend fun getPlanetsList(pageInfo: PageInfo): BaseDto {
+        val result =  apolloClient
+            .query(AllPlanetsQuery(
+                after = if(pageInfo.endCursor != null) Optional.Present(pageInfo.endCursor)
+                else Optional.absent(),
+                first = Optional.Present(pageSize),
+            ))
             .execute()
             .data
             ?.allPlanets
-            ?.toBaseModelList()
-            .orEmpty()
+
+        return BaseDto(
+            pageInfo = result?.pageInfo?.toPageInfo() ?: PageInfo(),
+            data = result?.toBaseModelList().orEmpty()
+        )
     }
 
     override suspend fun getCharacterDetails(id: String): BaseModel? {
