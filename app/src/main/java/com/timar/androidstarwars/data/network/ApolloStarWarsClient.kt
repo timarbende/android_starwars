@@ -4,6 +4,8 @@ import com.apollographql.apollo3.ApolloClient
 import com.timar.AllCharactersQuery
 import com.timar.AllPlanetsQuery
 import com.timar.AllStarShipsQuery
+import com.timar.PersonQuery
+import com.timar.androidstarwars.data.transformers.toBaseModel
 import com.timar.androidstarwars.data.transformers.toBaseModelList
 import com.timar.androidstarwars.domain.model.BaseModel
 import com.timar.androidstarwars.domain.network.StarWarsClient
@@ -39,5 +41,14 @@ class ApolloStarWarsClient(
             ?.allPlanets
             ?.toBaseModelList()
             .orEmpty()
+    }
+
+    override suspend fun getCharacterDetails(id: String): BaseModel? {
+        return apolloClient
+            .query(PersonQuery())
+            .execute()
+            .data
+            ?.person
+            ?.toBaseModel()
     }
 }

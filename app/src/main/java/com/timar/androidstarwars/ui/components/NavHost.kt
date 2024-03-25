@@ -37,7 +37,7 @@ fun StarWarsNavHost(
             arguments = DetailsDestination.arguments
         ) { navBackStackEntry ->
             DetailsScreen(
-                id = navBackStackEntry.arguments?.getString(DetailsDestination.itemId) ?: "error",
+                //id = navBackStackEntry.arguments?.getString(DetailsDestination.itemId) ?: "error",
                 contentType = navBackStackEntry.arguments?.getString(DetailsDestination.contentTypeArgument) ?: "Characters"
             )
         }

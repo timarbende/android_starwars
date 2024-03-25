@@ -4,19 +4,23 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.timar.androidstarwars.ui.util.ContentType
 
 @Composable
-fun DetailsScreen(
-    id: String,
-    contentType: String
+fun DetailsScreen (
+    viewModel: DetailsScreenViewModel = hiltViewModel(),
+    contentType: String,
 ) {
     val contentType = ContentType.fromString(contentType)
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Column {
         Text(
-            "Mock Details Screen for $id",
+            "Mock Details Screen",
             style = MaterialTheme.typography.headlineLarge
         )
 
@@ -36,7 +40,6 @@ fun DetailsScreen(
 @Composable
 private fun DetailsScreenPreview() {
     DetailsScreen(
-        "preview",
-        ContentType.Characters.toString()
+        contentType = ContentType.Characters.toString()
     )
 }
