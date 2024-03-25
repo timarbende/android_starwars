@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.timar.androidstarwars.domain.model.BaseModel
 import com.timar.androidstarwars.ui.components.StarWarsList
 import com.timar.androidstarwars.ui.util.ContentType
 
@@ -17,18 +18,22 @@ fun ListScreen(
     viewModel: ListScreenViewModel = hiltViewModel<ListScreenViewModel, ListScreenViewModel.ListScreenViewModelFactory>{factory ->
         factory.create(contentType)
     },
+    onListItemClick: (BaseModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Column {
+    Column (
+        modifier = modifier
+    ){
         Text(
             text = contentType.toString(),
             style = MaterialTheme.typography.displayMedium
         )
 
         StarWarsList(
-            data = state.data
+            data = state.data,
+            onListItemClick = onListItemClick
         )
     }
 }

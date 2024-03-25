@@ -16,14 +16,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.timar.androidstarwars.ui.theme.AndroidStarWarsTheme
+import com.timar.androidstarwars.ui.util.CharactersDestination
+import com.timar.androidstarwars.ui.util.NavDestination
 import com.timar.androidstarwars.ui.util.navigationDestiations
 
 @Composable
 fun BottomNavigationBar(
+    onTabSelected: (NavDestination) -> Unit,
+    currentDestination: NavDestination,
     modifier: Modifier = Modifier
 ) {
     NavigationBar(modifier = modifier){
-        navigationDestiations.forEachIndexed { index, destination ->
+        navigationDestiations.forEach {  destination ->
             NavigationBarItem(
                 icon = { Image(
                     painterResource(destination.icon),
@@ -33,11 +37,11 @@ fun BottomNavigationBar(
                         .size(28.dp)
                 ) },
                 label = {
-                    Text(
-                        stringResource(destination.titleId)
-                    ) },
-                selected = index == 0,
-                onClick = {}
+                    Text(destination.contentType.toString()) },
+                selected = destination == currentDestination,
+                onClick = {
+                    onTabSelected(destination)
+                }
             )
         }
     }
@@ -47,6 +51,9 @@ fun BottomNavigationBar(
 @Composable
 private fun BottomNavigationBarPreview() {
     AndroidStarWarsTheme {
-        BottomNavigationBar()
+        BottomNavigationBar(
+            currentDestination = CharactersDestination,
+            onTabSelected = {}
+        )
     }
 }
