@@ -1,9 +1,11 @@
 package com.timar.androidstarwars.domain.network
 
+import com.timar.androidstarwars.data.network.BaseDto
+import com.timar.androidstarwars.data.network.PageInfo
 import com.timar.androidstarwars.domain.model.BaseModel
 
 interface StarWarsClient {
-    suspend fun getCharactersList(): List<BaseModel>
+    suspend fun getCharactersList(pageInfo: PageInfo): BaseDto
 
     suspend fun getStarShipsList(): List<BaseModel>
 

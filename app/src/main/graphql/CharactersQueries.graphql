@@ -1,8 +1,14 @@
-query AllCharactersQuery {
-    allPeople {
+query AllCharacters($after: String, $before: String, $first: Int, $last: Int) {
+    allPeople(after: $after, before: $before, first: $first, last: $last) {
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
         people {
-            name
             id
+            name
             filmConnection {
                 totalCount
             }
