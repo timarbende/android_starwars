@@ -1,5 +1,11 @@
-query AllPlanetsQuery {
-    allPlanets {
+query AllPlanetsQuery($after: String, $first: Int) {
+    allPlanets(after: $after, first: $first) {
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
         planets {
             id
             name
