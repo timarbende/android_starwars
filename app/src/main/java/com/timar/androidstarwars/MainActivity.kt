@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.timar.androidstarwars.ui.components.BottomNavigationBar
+import com.timar.androidstarwars.ui.components.StarWarsNavHost
 import com.timar.androidstarwars.ui.screen.listscreen.ListScreen
 import com.timar.androidstarwars.ui.theme.AndroidStarWarsTheme
 import com.timar.androidstarwars.ui.util.ContentType
@@ -24,16 +26,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidStarWarsTheme {
-                // A surface container using the 'background' color from the theme
+                val navController = rememberNavController()
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize(),
                     bottomBar = {
                         BottomNavigationBar()
                     },
-                    content = {padding->
-                        ListScreen(
-                            contentType = ContentType.Planets,
+                    content = { padding->
+                        StarWarsNavHost(
+                            navController = navController,
                             modifier = Modifier.padding(padding)
                         )
                     }

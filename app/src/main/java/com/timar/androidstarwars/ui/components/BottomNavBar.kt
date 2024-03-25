@@ -33,9 +33,7 @@ fun BottomNavigationBar(
                         .size(28.dp)
                 ) },
                 label = {
-                    Text(
-                        stringResource(destination.titleId)
-                    ) },
+                    Text(destination.contentType.toString()) },
                 selected = index == 0,
                 onClick = {}
             )
