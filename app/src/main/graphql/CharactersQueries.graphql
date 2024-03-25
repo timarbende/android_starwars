@@ -9,3 +9,16 @@ query AllCharactersQuery {
         }
     }
 }
+
+query Person($personId: ID) {
+    person(id: $personId) {
+        id
+        birthYear
+        eyeColor
+        gender
+        hairColor
+        height
+        mass
+        name
+    }
+}

@@ -1,42 +1,44 @@
 package com.timar.androidstarwars.ui.screen.detailsscreen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.timar.androidstarwars.ui.util.ContentType
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.timar.androidstarwars.ui.components.detailsscreen.DetailsGrid
 
 @Composable
-fun DetailsScreen(
-    id: String,
-    contentType: String
+fun DetailsScreen (
+    viewModel: DetailsScreenViewModel = hiltViewModel(),
 ) {
-    val contentType = ContentType.fromString(contentType)
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Column {
+    Column(
+        modifier = Modifier
+            .padding(
+                top = 16.dp,
+                start = 16.dp,
+                end = 16.dp
+            )
+    ) {
         Text(
-            "Mock Details Screen for $id",
-            style = MaterialTheme.typography.headlineLarge
+            state.data.name,
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.weight(1f)
         )
 
-        Text(
-            "Content Type is $contentType",
-            style = MaterialTheme.typography.bodyMedium
-        )
-
-        Text(
-            "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.",
-            style = MaterialTheme.typography.bodyMedium
-        )
+        DetailsGrid(state.data.details)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun DetailsScreenPreview() {
-    DetailsScreen(
-        "preview",
-        ContentType.Characters.toString()
-    )
+    DetailsScreen()
 }

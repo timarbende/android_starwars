@@ -5,7 +5,7 @@ enum class ContentType {
     StarShips,
     Planets;
 
-    override fun toString(): String = when(this){
+    fun getReadable(): String = when(this){
         Characters -> "Characters"
         StarShips -> "Star Ships"
         Planets -> "Planets"

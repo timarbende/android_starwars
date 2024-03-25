@@ -1,6 +1,7 @@
 package com.timar.androidstarwars.data.transformers
 
 import com.timar.AllStarShipsQuery
+import com.timar.StarshipQuery
 import com.timar.androidstarwars.domain.model.BaseModel
 
 fun AllStarShipsQuery.AllStarships.toBaseModelList(): List<BaseModel> {
@@ -12,3 +13,18 @@ fun AllStarShipsQuery.AllStarships.toBaseModelList(): List<BaseModel> {
         )
     }.orEmpty()
 }
+
+fun StarshipQuery.Starship.toBaseModel(): BaseModel = BaseModel(
+    id = this.id,
+    name = this.name.orEmpty(),
+    numberOfFilmReferences = 0,
+    details = extractDetails(
+        Pair(this.starshipClass.toString(), "Class"),
+        Pair(this.crew, "Crew"),
+        Pair(this.maxAtmospheringSpeed.toString(), "Max speed"),
+        Pair(this.manufacturers?.joinToString(), "Manufacturers"),
+        Pair(this.costInCredits.toString(), "Cost (credits)"),
+        Pair(this.cargoCapacity.toString(), "Cargo capacity"),
+        Pair(this.consumables, "Consumables"),
+    )
+)

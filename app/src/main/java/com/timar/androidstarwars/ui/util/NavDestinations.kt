@@ -43,14 +43,15 @@ object DetailsDestination: NavDestination {
     override val iconDescription: String = "this value is not used"
     override val route: String = "details"
     override var contentType: ContentType = ContentType.Planets
-    const val itemId = "itemId"
+
+    const val itemIdArgument = "itemId"
     const val contentTypeArgument = "contentType"
 
-    val routeWithArgs = "${route}/{${contentTypeArgument}}&{${itemId}}"
+    val routeWithArgs = "${route}/{${contentTypeArgument}}&{${itemIdArgument}}"
     val arguments = listOf(
         // At the beginning I was implementing this via NavType.EnumType(ContentType::class.java), but deserializing required min Api33,
         // so I decided to work with string representations for better compatibility
-        navArgument(contentTypeArgument) {type = NavType.StringType },
-        navArgument(itemId) {type = NavType.StringType}
+        navArgument(contentTypeArgument) {type = NavType.EnumType(ContentType::class.java) },
+        navArgument(itemIdArgument) {type = NavType.StringType}
     )
 }

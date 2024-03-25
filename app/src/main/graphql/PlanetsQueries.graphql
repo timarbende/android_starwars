@@ -9,3 +9,17 @@ query AllPlanetsQuery {
         }
     }
 }
+
+query Planet($planetId: ID) {
+    planet(id: $planetId) {
+        id
+        name
+        climates
+        diameter
+        gravity
+        orbitalPeriod
+        population
+        rotationPeriod
+        surfaceWater
+    }
+}

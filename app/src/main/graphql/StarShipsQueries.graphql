@@ -9,3 +9,17 @@ query AllStarShipsQuery {
         }
     }
 }
+
+query Starship($starshipId: ID) {
+    starship(id: $starshipId) {
+        id
+        name
+        crew
+        costInCredits
+        consumables
+        starshipClass
+        manufacturers
+        maxAtmospheringSpeed
+        cargoCapacity
+    }
+}
