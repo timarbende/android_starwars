@@ -41,10 +41,10 @@ class DetailsScreenViewModel @Inject constructor(
                         result = swapiClient.getCharacterDetails(id)
                     }
                     ContentType.StarShips -> {
-
+                        result = swapiClient.getStarShipDetails(id)
                     }
                     ContentType.Planets -> {
-
+                        result = swapiClient.getPlanetDetails(id)
                     }
                 }
                 if (result != null) {

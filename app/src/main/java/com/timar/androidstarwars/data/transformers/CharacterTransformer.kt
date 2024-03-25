@@ -19,7 +19,7 @@ fun PersonQuery.Person.toBaseModel(): BaseModel = BaseModel(
     name = this.name.orEmpty(),
     numberOfFilmReferences = 0,
     details = extractDetails(
-        Pair(this.birthYear, "Year of Birth"),
+        Pair(this.birthYear, "Year of birth"),
         Pair(this.gender, "Gender"),
         Pair(this.eyeColor, "Eye color"),
         Pair(this.hairColor, "Hair color"),

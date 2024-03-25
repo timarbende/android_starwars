@@ -10,4 +10,8 @@ interface StarWarsClient {
     suspend fun getPlanetsList(): List<BaseModel>
 
     suspend fun getCharacterDetails(id: String): BaseModel?
+
+    suspend fun getStarShipDetails(id: String): BaseModel?
+
+    suspend fun getPlanetDetails(id: String): BaseModel?
 }

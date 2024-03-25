@@ -50,7 +50,7 @@ fun DetailChip(
             Spacer(modifier = Modifier.width(4.dp))
             Text(
                 detail.value,
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.alignByBaseline()
             )
         }
