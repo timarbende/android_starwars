@@ -1,4 +1,4 @@
-package com.timar.androidstarwars.ui.components
+package com.timar.androidstarwars.ui.components.listscreen
 
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme

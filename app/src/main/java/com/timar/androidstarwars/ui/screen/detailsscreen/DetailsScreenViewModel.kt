@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(
-    private val swapiClient: StarWarsClient,
-    private val savedStateHandle: SavedStateHandle
+    swapiClient: StarWarsClient,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel(){
     private val _state = MutableStateFlow(DetailsScreenState())
     val state = _state.asStateFlow()
@@ -34,8 +34,6 @@ class DetailsScreenViewModel @Inject constructor(
         val id = savedStateHandle.get<String>(DetailsDestination.itemIdArgument)
 
         if(id != null && contentType != null) {
-
-
             viewModelScope.launch {
                 var result: BaseModel? = null
                 when(contentType){

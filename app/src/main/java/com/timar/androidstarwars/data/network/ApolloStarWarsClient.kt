@@ -1,6 +1,7 @@
 package com.timar.androidstarwars.data.network
 
 import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.api.Optional
 import com.timar.AllCharactersQuery
 import com.timar.AllPlanetsQuery
 import com.timar.AllStarShipsQuery
@@ -45,7 +46,7 @@ class ApolloStarWarsClient(
 
     override suspend fun getCharacterDetails(id: String): BaseModel? {
         return apolloClient
-            .query(PersonQuery())
+            .query(PersonQuery(Optional.Present(id)))
             .execute()
             .data
             ?.person

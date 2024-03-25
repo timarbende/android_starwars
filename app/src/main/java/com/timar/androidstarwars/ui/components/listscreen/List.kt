@@ -1,4 +1,4 @@
-package com.timar.androidstarwars.ui.components
+package com.timar.androidstarwars.ui.components.listscreen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
