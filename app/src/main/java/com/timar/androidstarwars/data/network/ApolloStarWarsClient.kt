@@ -1,5 +1,6 @@
 package com.timar.androidstarwars.data.network
 
+import android.util.Log
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import com.timar.AllCharactersQuery
@@ -10,40 +11,63 @@ import com.timar.PlanetQuery
 import com.timar.StarshipQuery
 import com.timar.androidstarwars.data.transformers.toBaseModel
 import com.timar.androidstarwars.data.transformers.toBaseModelList
+import com.timar.androidstarwars.data.transformers.toPageInfo
+import com.timar.androidstarwars.di.pageSize
 import com.timar.androidstarwars.domain.model.BaseModel
 import com.timar.androidstarwars.domain.network.StarWarsClient
 
 class ApolloStarWarsClient(
     private val apolloClient: ApolloClient
 ) : StarWarsClient {
-    override suspend fun getCharactersList(): List<BaseModel> {
-        return apolloClient
-            .query(AllCharactersQuery())
+    override suspend fun getCharactersList(pageInfo: PageInfo): BaseDto {
+        val result =  apolloClient
+            .query(AllCharactersQuery(
+                after = if(pageInfo.endCursor != null) Optional.Present(pageInfo.endCursor)
+                        else Optional.absent(),
+                first = Optional.Present(pageSize),
+            ))
             .execute()
             .data
             ?.allPeople
-            ?.toBaseModelList()
-            .orEmpty()
+
+        return BaseDto(
+            pageInfo = result?.pageInfo?.toPageInfo() ?: PageInfo(),
+            data = result?.toBaseModelList().orEmpty()
+        )
     }
 
-    override suspend fun getStarShipsList(): List<BaseModel> {
-        return apolloClient
-            .query(AllStarShipsQuery())
+    override suspend fun getStarShipsList(pageInfo: PageInfo): BaseDto {
+        val result =  apolloClient
+            .query(AllStarShipsQuery(
+                after = if(pageInfo.endCursor != null) Optional.Present(pageInfo.endCursor)
+                else Optional.absent(),
+                first = Optional.Present(pageSize),
+            ))
             .execute()
             .data
             ?.allStarships
-            ?.toBaseModelList()
-            .orEmpty()
+
+        return BaseDto(
+            pageInfo = result?.pageInfo?.toPageInfo() ?: PageInfo(),
+            data = result?.toBaseModelList().orEmpty()
+        )
     }
 
-    override suspend fun getPlanetsList(): List<BaseModel> {
-        return apolloClient
-            .query(AllPlanetsQuery())
+    override suspend fun getPlanetsList(pageInfo: PageInfo): BaseDto {
+        val result =  apolloClient
+            .query(AllPlanetsQuery(
+                after = if(pageInfo.endCursor != null) Optional.Present(pageInfo.endCursor)
+                else Optional.absent(),
+                first = Optional.Present(pageSize),
+            ))
             .execute()
             .data
             ?.allPlanets
-            ?.toBaseModelList()
-            .orEmpty()
+
+        return BaseDto(
+            pageInfo = result?.pageInfo?.toPageInfo() ?: PageInfo(),
+            data = result?.toBaseModelList().orEmpty()
+        )
     }
 
     override suspend fun getCharacterDetails(id: String): BaseModel? {

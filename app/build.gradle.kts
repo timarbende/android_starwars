@@ -80,6 +80,17 @@ dependencies {
 
     //Navigation
     implementation(libs.androidx.navigation.compose)
+
+    //Paging
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
+
+    //Room
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.paging)
 }
 
 apollo {
