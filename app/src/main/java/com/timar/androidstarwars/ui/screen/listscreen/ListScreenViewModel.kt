@@ -11,20 +11,15 @@ import com.timar.androidstarwars.data.local.character.CharacterEntity
 import com.timar.androidstarwars.data.local.planet.PlanetEntity
 import com.timar.androidstarwars.data.local.starship.StarShipEntity
 import com.timar.androidstarwars.data.transformers.toBaseModel
-import com.timar.androidstarwars.data.transformers.toCharacterEntity
 import com.timar.androidstarwars.domain.model.BaseModel
-import com.timar.androidstarwars.domain.network.StarWarsClient
 import com.timar.androidstarwars.ui.util.ContentType
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = ListScreenViewModel.ListScreenViewModelFactory::class)
 class ListScreenViewModel @AssistedInject constructor(

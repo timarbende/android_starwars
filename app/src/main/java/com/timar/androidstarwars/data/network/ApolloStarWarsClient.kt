@@ -1,9 +1,7 @@
 package com.timar.androidstarwars.data.network
 
-import android.util.Log
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
-import com.apollographql.apollo3.exception.ApolloException
 import com.timar.AllCharactersQuery
 import com.timar.AllPlanetsQuery
 import com.timar.AllStarShipsQuery

@@ -1,8 +1,7 @@
 package com.timar.androidstarwars.ui.screen.listscreen
 
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,15 +13,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
-import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.timar.androidstarwars.domain.model.BaseModel
 import com.timar.androidstarwars.ui.components.listscreen.StarWarsList
@@ -55,21 +51,28 @@ fun ListScreen(
                 .fillMaxSize()
         ) {
             CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.align(Alignment.Center)
             )
         }
     } else {
-        Column(
-            modifier = Modifier
-                .padding(
-                    top = 16.dp,
-                    start = 16.dp,
-                    end = 16.dp
-                )
-        ) {
+        Column {
             Text(
                 text = contentType.getReadable(),
-                style = MaterialTheme.typography.displayMedium
+                style = MaterialTheme.typography.displayMedium,
+                modifier = Modifier
+                    .background(
+                        color = when (contentType) {
+                            ContentType.Characters -> MaterialTheme.colorScheme.primaryContainer
+                            ContentType.StarShips -> MaterialTheme.colorScheme.secondaryContainer
+                            ContentType.Planets -> MaterialTheme.colorScheme.tertiaryContainer
+                        },
+                        shape = MaterialTheme.shapes.large,
+                    )
+                    .padding(
+                        start = 4.dp,
+                        end = 12.dp
+                    )
             )
 
             Spacer(modifier = Modifier.height(24.dp))

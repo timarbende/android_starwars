@@ -2,11 +2,9 @@ package com.timar.androidstarwars.data.local.character
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import androidx.room.Upsert
+
 @Dao
 interface CharacterDao {
 

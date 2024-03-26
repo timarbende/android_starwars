@@ -1,17 +1,15 @@
 package com.timar.androidstarwars.ui.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.timar.androidstarwars.ui.screen.detailsscreen.DetailsScreen
 import com.timar.androidstarwars.ui.screen.listscreen.ListScreen
-import com.timar.androidstarwars.ui.screen.listscreen.ListScreenViewModel
 import com.timar.androidstarwars.ui.util.CharactersDestination
-import com.timar.androidstarwars.ui.util.ContentType
 import com.timar.androidstarwars.ui.util.DetailsDestination
 import com.timar.androidstarwars.ui.util.navigationDestiations
 
@@ -24,6 +22,11 @@ fun StarWarsNavHost(
         navController = navController,
         startDestination = CharactersDestination.route,
         modifier = modifier
+            .padding(
+                top = 16.dp,
+                start = 16.dp,
+                end = 16.dp
+            )
     ) {
         navigationDestiations.forEach{ destination->
             composable(route = destination.route) {
@@ -39,7 +42,11 @@ fun StarWarsNavHost(
             route = DetailsDestination.routeWithArgs,
             arguments = DetailsDestination.arguments
         ) {
-            DetailsScreen()
+            DetailsScreen(
+                onDismiss = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
