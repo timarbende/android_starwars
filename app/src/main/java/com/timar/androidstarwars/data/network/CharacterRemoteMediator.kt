@@ -8,12 +8,10 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.apollographql.apollo3.exception.ApolloException
 import com.timar.androidstarwars.data.local.LocalDatabase
 import com.timar.androidstarwars.data.local.character.CharacterEntity
 import com.timar.androidstarwars.data.transformers.toCharacterEntity
 import com.timar.androidstarwars.domain.network.StarWarsClient
-import java.io.IOException
 
 class CharacterRemoteMediator(
     private val localDatabase: LocalDatabase,
@@ -35,9 +33,7 @@ class CharacterRemoteMediator(
             LoadType.APPEND -> {
                 val lastItem = state.lastItemOrNull()
                 if (lastItem == null) {
-                    return MediatorResult.Success(
-                        endOfPaginationReached = true
-                    )
+                    null
                 }
                 pageInfo?.endCursor
             }

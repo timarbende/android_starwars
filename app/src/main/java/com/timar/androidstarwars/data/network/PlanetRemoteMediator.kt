@@ -32,9 +32,7 @@ class PlanetRemoteMediator(
             LoadType.APPEND -> {
                 val lastItem = state.lastItemOrNull()
                 if (lastItem == null) {
-                    return MediatorResult.Success(
-                        endOfPaginationReached = true
-                    )
+                    null
                 }
                 pageInfo?.endCursor
             }
