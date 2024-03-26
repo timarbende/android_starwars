@@ -46,7 +46,11 @@ fun StarWarsNavHost(
             route = DetailsDestination.routeWithArgs,
             arguments = DetailsDestination.arguments
         ) {
-            DetailsScreen()
+            DetailsScreen(
+                onDismiss = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

@@ -31,8 +31,10 @@ fun DetailsGrid(
         modifier = modifier
             .background(
                 MaterialTheme.colorScheme.surface,
-                shape = MaterialTheme.shapes.extraSmall
-            ),
+                shape = MaterialTheme.shapes.medium
+            )
+            .padding(horizontal = 8.dp)
+        ,
     ){
         while (i < size) {
             var j = 0
@@ -40,7 +42,7 @@ fun DetailsGrid(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        top = 16.dp
+                        top = 16.dp,
                     )
             ) {
                 while (j < rowSize && i + j < size) {
