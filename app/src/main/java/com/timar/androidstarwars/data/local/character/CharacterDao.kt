@@ -10,18 +10,18 @@ import androidx.room.Upsert
 @Dao
 interface CharacterDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertCharacters(characters: List<CharacterEntity>)
-
-    @Query("UPDATE CharacterEntity SET name = :name, numberOfFilmReferences = :numberOfFilmReferences WHERE id = :id")
-    suspend fun updateCharacter(id: String, name: String, numberOfFilmReferences: Int)
+    @Upsert
+    suspend fun upsertCharacters(characters: List<CharacterEntity>)
 
     @Query("SELECT * FROM CharacterEntity")
     fun pagingSource(): PagingSource<Int, CharacterEntity>
 
+    @Query("SELECT * FROM CharacterEntity")
+    fun getAll(): List<CharacterEntity>
+
     @Query("DELETE FROM CharacterEntity")
     suspend fun clearAll()
 
-    @Upsert
-    suspend fun upsertCharacter(character: CharacterEntity)
+    @Query("UPDATE CharacterEntity SET isFavourite = :isFavourite WHERE id = :id")
+    suspend fun updateCharacterFavourite(id: String, isFavourite: Boolean)
 }

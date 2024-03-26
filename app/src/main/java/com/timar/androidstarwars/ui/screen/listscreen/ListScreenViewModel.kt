@@ -63,7 +63,7 @@ class ListScreenViewModel @AssistedInject constructor(
     fun onFavouriteButtonClick (item: BaseModel) {
         item.isFavourite = !item.isFavourite
         viewModelScope.launch {
-            localDb.characterDao.upsertCharacter(item.toCharacterEntity())
+            localDb.characterDao.updateCharacterFavourite(item.id, item.isFavourite)
         }
     }
 }

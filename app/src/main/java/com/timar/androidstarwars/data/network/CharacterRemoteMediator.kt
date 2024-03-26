@@ -49,19 +49,16 @@ class CharacterRemoteMediator(
         }
 
         localDatabase.withTransaction {
-            Log.d("CharacterRemoteMediator", "loadType: $loadType")
+            var oldCharacterEntities: List<CharacterEntity> = emptyList()
             if (loadType == LoadType.REFRESH) {
+                oldCharacterEntities = localDatabase.characterDao.getAll()
                 localDatabase.characterDao.clearAll()
             }
-            val characterEntities = response.data.map { it.toCharacterEntity() }
-            characterEntities.forEach {
-                localDatabase.characterDao.updateCharacter(
-                    it.id,
-                    it.name,
-                    it.numberOfFilmReferences
-                )
+            val newCharacterEntities = response.data.map { it.toCharacterEntity() }
+            localDatabase.characterDao.upsertCharacters(newCharacterEntities)
+            oldCharacterEntities.forEach {entity->
+                localDatabase.characterDao.updateCharacterFavourite(entity.id, entity.isFavourite)
             }
-            localDatabase.characterDao.insertCharacters(characterEntities)
         }
 
         pageInfo = response.pageInfo
