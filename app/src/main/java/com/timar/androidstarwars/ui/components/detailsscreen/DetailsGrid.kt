@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,42 +26,27 @@ fun DetailsGrid(
     rowSize: Int = 2
 ) {
 
-    val size = details.size
-    var i = 0
-    Column(
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(rowSize),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .background(
                 MaterialTheme.colorScheme.surface,
                 shape = MaterialTheme.shapes.medium
             )
-            .padding(horizontal = 8.dp)
-        ,
-    ){
-        while (i < size) {
-            var j = 0
-            Row(
+            .padding(
+                horizontal = 8.dp,
+                vertical = 16.dp
+            )
+    ) {
+        items(details){detail ->
+            DetailChip(
+                detail = detail,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 16.dp,
-                    )
-            ) {
-                while (j < rowSize && i + j < size) {
-                    DetailChip(
-                        detail = details[i + j],
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 8.dp)
-                    )
-                    j++
-                }
-                if(j < rowSize){
-                    Box(modifier = Modifier.weight(1f))
-                }
-            }
-            i += j
+                    .padding(horizontal = 8.dp)
+            )
         }
-        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
