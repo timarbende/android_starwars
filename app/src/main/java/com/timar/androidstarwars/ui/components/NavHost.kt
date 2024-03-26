@@ -1,7 +1,9 @@
 package com.timar.androidstarwars.ui.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -24,6 +26,11 @@ fun StarWarsNavHost(
         navController = navController,
         startDestination = CharactersDestination.route,
         modifier = modifier
+            .padding(
+                top = 16.dp,
+                start = 16.dp,
+                end = 16.dp
+            )
     ) {
         navigationDestiations.forEach{ destination->
             composable(route = destination.route) {

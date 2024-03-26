@@ -59,14 +59,7 @@ fun ListScreen(
             )
         }
     } else {
-        Column(
-            modifier = Modifier
-                .padding(
-                    top = 16.dp,
-                    start = 16.dp,
-                    end = 16.dp
-                )
-        ) {
+        Column {
             Text(
                 text = contentType.getReadable(),
                 style = MaterialTheme.typography.displayMedium

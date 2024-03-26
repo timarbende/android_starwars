@@ -21,19 +21,18 @@ fun DetailsScreen (
 
     Column(
         modifier = Modifier
-            .padding(
-                top = 16.dp,
-                start = 16.dp,
-                end = 16.dp
-            )
     ) {
         Text(
             state.data.name,
-            style = MaterialTheme.typography.headlineLarge,
+            style = MaterialTheme.typography.displayMedium,
             modifier = Modifier.weight(1f)
         )
 
-        DetailsGrid(state.data.details)
+        DetailsGrid(
+            state.data.details,
+            modifier = Modifier
+                .weight(2f)
+        )
     }
 }
 

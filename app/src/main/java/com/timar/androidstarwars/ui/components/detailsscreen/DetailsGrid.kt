@@ -1,13 +1,17 @@
 package com.timar.androidstarwars.ui.components.detailsscreen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +29,10 @@ fun DetailsGrid(
     var i = 0
     Column(
         modifier = modifier
+            .background(
+                MaterialTheme.colorScheme.surface,
+                shape = MaterialTheme.shapes.extraSmall
+            ),
     ){
         while (i < size) {
             var j = 0
@@ -50,17 +58,22 @@ fun DetailsGrid(
             }
             i += j
         }
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 @Preview
 @Composable
 private fun DetailsGridPreview() {
-    val details = List(9){
+    val details = MutableList(8){
         Detail(
             description = "description",
             value = "${it + 1000}"
         )
     }
+    details.add(Detail(
+        description = "lengthy descriptionnnnnnnnnnnnnnnnnn",
+        value= "very  very very long value"
+    ))
     DetailsGrid(details)
 }

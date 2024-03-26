@@ -1,8 +1,11 @@
 package com.timar.androidstarwars.ui.components.detailsscreen
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
@@ -13,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.timar.androidstarwars.domain.model.Detail
@@ -26,32 +30,32 @@ fun DetailChip(
         shape = MaterialTheme.shapes.extraSmall,
         border = BorderStroke(
             1.dp,
-            MaterialTheme.colorScheme.onSurface
+            MaterialTheme.colorScheme.outline
         ),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
             contentColor = MaterialTheme.colorScheme.onSurface
         ),
         modifier = modifier
+            .fillMaxWidth()
     ) {
-        Row (
+        Column (
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(12.dp),
-            verticalAlignment = Alignment.Bottom
+            horizontalAlignment = Alignment.End
         ){
             Text(
                 detail.description,
                 fontWeight = FontWeight.Normal,
                 style = MaterialTheme.typography.labelMedium,
-                modifier = Modifier
-                    .alignByBaseline()
-                    .weight(1f)
+                textAlign = TextAlign.End
             )
-            Spacer(modifier = Modifier.width(4.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 detail.value,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.alignByBaseline()
+                textAlign = TextAlign.End
             )
         }
     }

@@ -56,19 +56,3 @@ fun StarWarsList(
         }
     }
 }
-
-/*@Preview(device = "spec:width=1080px,height=1080px")
-@Composable
-private fun StarWarsListPreview() {
-    val data = List(10) {
-        BaseModel(
-            id = "preview",
-            name = it.toString(),
-            numberOfFilmReferences = it
-        )
-    }
-    StarWarsList(
-        data = data,
-        onListItemClick = {}
-    )
-}*/
