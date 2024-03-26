@@ -58,14 +58,15 @@ fun DetailsScreen (
                 style = MaterialTheme.typography.displayMedium,
                 modifier = Modifier
                     .padding(start = 16.dp)
-                    .weight(1f)
             )
+
+            Spacer(modifier = Modifier.height(24.dp))
 
             DetailsGrid(
                 state.data.details,
                 modifier = Modifier
+                    .weight(1f)
                     .padding(horizontal = 8.dp)
-                    .weight(2f)
             )
         }
     }
