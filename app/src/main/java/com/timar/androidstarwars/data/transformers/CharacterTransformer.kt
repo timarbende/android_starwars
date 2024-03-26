@@ -3,7 +3,6 @@ package com.timar.androidstarwars.data.transformers
 import com.timar.AllCharactersQuery
 import com.timar.PersonQuery
 import com.timar.androidstarwars.domain.model.BaseModel
-import com.timar.androidstarwars.domain.model.Detail
 
 fun AllCharactersQuery.AllPeople.toBaseModelList(): List<BaseModel> =
     this.people?.mapNotNull { person ->

@@ -6,10 +6,12 @@ import androidx.paging.Pager
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
+import com.timar.androidstarwars.data.local.LocalDatabase
 import com.timar.androidstarwars.data.local.character.CharacterEntity
 import com.timar.androidstarwars.data.local.planet.PlanetEntity
 import com.timar.androidstarwars.data.local.starship.StarShipEntity
 import com.timar.androidstarwars.data.transformers.toBaseModel
+import com.timar.androidstarwars.data.transformers.toCharacterEntity
 import com.timar.androidstarwars.domain.model.BaseModel
 import com.timar.androidstarwars.domain.network.StarWarsClient
 import com.timar.androidstarwars.ui.util.ContentType
@@ -21,14 +23,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = ListScreenViewModel.ListScreenViewModelFactory::class)
 class ListScreenViewModel @AssistedInject constructor(
     @Assisted val contentType: ContentType,
-    private val characterPager: Pager<Int, CharacterEntity>,
-    private val starshipsPager: Pager<Int, StarShipEntity>,
-    private val planetsPager: Pager<Int, PlanetEntity>
+    characterPager: Pager<Int, CharacterEntity>,
+    starshipsPager: Pager<Int, StarShipEntity>,
+    planetsPager: Pager<Int, PlanetEntity>,
+    private val localDb: LocalDatabase
 ): ViewModel() {
     val pagingFlow: Flow<PagingData<BaseModel>>
 
@@ -54,5 +58,12 @@ class ListScreenViewModel @AssistedInject constructor(
                 }
             }
             .cachedIn(viewModelScope)
+    }
+
+    fun onFavouriteButtonClick (item: BaseModel) {
+        item.isFavourite = !item.isFavourite
+        viewModelScope.launch {
+            localDb.characterDao.updateCharacterFavourite(item.id, item.isFavourite)
+        }
     }
 }

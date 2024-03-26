@@ -8,4 +8,5 @@ data class CharacterEntity(
     val id: String,
     val name: String,
     val numberOfFilmReferences: Int,
+    val isFavourite: Boolean
 )
