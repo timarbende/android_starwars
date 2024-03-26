@@ -23,39 +23,25 @@ class PlanetRemoteMediator(
         loadType: LoadType,
         state: PagingState<Int, PlanetEntity>
     ): MediatorResult {
-        var endCursor: String? = null
+        val endCursor = when (loadType) {
+            LoadType.REFRESH -> null
+            LoadType.PREPEND -> return MediatorResult.Success(
+                endOfPaginationReached = true
+            )
 
-        if (pageInfo != null) {
-            endCursor = when (loadType) {
-                LoadType.REFRESH -> {
-                    val firstItem = state.firstItemOrNull()
-                    if (firstItem == null) {
-                        return MediatorResult.Success(
-                            endOfPaginationReached = true
-                        )
-                    } else {
-                        pageInfo!!.endCursor
-                    }
+            LoadType.APPEND -> {
+                val lastItem = state.lastItemOrNull()
+                if (lastItem == null) {
+                    null
                 }
-
-                LoadType.PREPEND -> return MediatorResult.Success(
-                    endOfPaginationReached = true
-                )
-
-                LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
-                    if (lastItem == null) {
-                        return MediatorResult.Success(
-                            endOfPaginationReached = true
-                        )
-                    } else {
-                        pageInfo!!.endCursor
-                    }
-                }
+                pageInfo?.endCursor
             }
         }
 
         val response: BaseDto = swapi.getPlanetsList(PageInfo(endCursor = endCursor))
+        if(response.data.isEmpty() && response.pageInfo.endCursor == null && response.pageInfo.startCursor == null){
+            return MediatorResult.Error(Exception("Star Wars API unaccessible"))
+        }
 
         localDatabase.withTransaction {
             if (loadType == LoadType.REFRESH) {
@@ -68,7 +54,7 @@ class PlanetRemoteMediator(
         pageInfo = response.pageInfo
 
         return MediatorResult.Success(
-            endOfPaginationReached = response.pageInfo.endCursor == null
+            endOfPaginationReached = response.data.isEmpty()
         )
     }
 }

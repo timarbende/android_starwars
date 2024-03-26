@@ -9,6 +9,8 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import com.timar.androidstarwars.R
 import com.timar.androidstarwars.domain.model.BaseModel
 
@@ -23,7 +25,10 @@ fun StarWarsList(
     LazyColumn(
         modifier = modifier
     ) {
-        items(count = data.itemCount) { index ->
+        items(
+            count = data.itemCount,
+            key = data.itemKey { it.id }
+        ) { index ->
             val item = data[index]
             if (item != null) {
                 StarWarsListItem(
@@ -44,8 +49,8 @@ fun StarWarsList(
                 )
             }
         }
-        item{
-            if (data.loadState.append is LoadState.Loading){
+        item {
+            if (data.loadState.append is LoadState.Loading) {
                 CircularProgressIndicator()
             }
         }
