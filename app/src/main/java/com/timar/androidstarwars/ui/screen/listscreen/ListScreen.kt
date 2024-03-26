@@ -58,25 +58,30 @@ fun ListScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
         }
-    }
-    Column(
-        modifier = Modifier
-            .padding(
-                top = 16.dp,
-                start = 16.dp,
-                end = 16.dp
+    } else {
+        Column(
+            modifier = Modifier
+                .padding(
+                    top = 16.dp,
+                    start = 16.dp,
+                    end = 16.dp
+                )
+        ) {
+            Text(
+                text = contentType.getReadable(),
+                style = MaterialTheme.typography.displayMedium
             )
-    ) {
-        Text(
-            text = contentType.getReadable(),
-            style = MaterialTheme.typography.displayMedium
-        )
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-        StarWarsList(
-            data = pagingItems,
-            onListItemClick = onListItemClick
-        )
+            StarWarsList(
+                data = pagingItems,
+                hasFavouriteButton = contentType == ContentType.Characters,
+                onListItemClick = onListItemClick,
+                onFavouriteButtonClick = {
+                    viewModel.onFavouriteButtonClick(it)
+                }
+            )
+        }
     }
 }

@@ -1,5 +1,10 @@
 package com.timar.androidstarwars.ui.components.listscreen
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -14,6 +19,9 @@ import com.timar.androidstarwars.ui.theme.AndroidStarWarsTheme
 fun StarWarsListItem(
     title: String,
     subtitle: String,
+    hasFavouriteButton: Boolean,
+    isFavourite: Boolean,
+    onFavouriteButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     ListItem(
@@ -29,6 +37,17 @@ fun StarWarsListItem(
                 style = MaterialTheme.typography.titleSmall
             )
         },
+        trailingContent = {
+            if(hasFavouriteButton) {
+                IconButton(onClick = onFavouriteButtonClick) {
+                    Icon(
+                        imageVector = if (isFavourite) Icons.Rounded.Favorite
+                                    else Icons.Rounded.FavoriteBorder,
+                        contentDescription = "Favorite button"
+                    )
+                }
+            }
+        },
         modifier = modifier
     )
 }
@@ -43,7 +62,10 @@ private fun StarWarsListItemPreview() {
                 id = R.plurals.number_of_film_references,
                 5,
                 5
-            )
+            ),
+            hasFavouriteButton = true,
+            isFavourite = true,
+            onFavouriteButtonClick = {}
         )
     }
 }

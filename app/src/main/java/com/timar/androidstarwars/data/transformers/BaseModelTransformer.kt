@@ -9,12 +9,14 @@ fun BaseModel.toCharacterEntity(): CharacterEntity = CharacterEntity(
     id = id,
     name = name,
     numberOfFilmReferences = numberOfFilmReferences,
+    isFavourite = isFavourite
 )
 
 fun CharacterEntity.toBaseModel(): BaseModel = BaseModel(
     id = id,
     name = name,
     numberOfFilmReferences = numberOfFilmReferences,
+    isFavourite = isFavourite
 )
 
 fun BaseModel.toStarShipEntity(): StarShipEntity = StarShipEntity(

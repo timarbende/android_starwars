@@ -16,7 +16,9 @@ import com.timar.androidstarwars.domain.model.BaseModel
 fun StarWarsList(
     data: LazyPagingItems<BaseModel>,
     onListItemClick: (BaseModel) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    hasFavouriteButton: Boolean,
+    onFavouriteButtonClick: (BaseModel) -> Unit
 ) {
     LazyColumn(
         modifier = modifier
@@ -31,6 +33,11 @@ fun StarWarsList(
                         item.numberOfFilmReferences,
                         item.numberOfFilmReferences
                     ),
+                    hasFavouriteButton = hasFavouriteButton,
+                    isFavourite = item.isFavourite,
+                    onFavouriteButtonClick = {
+                        onFavouriteButtonClick(item)
+                    },
                     modifier = Modifier.clickable {
                         onListItemClick(item)
                     }
