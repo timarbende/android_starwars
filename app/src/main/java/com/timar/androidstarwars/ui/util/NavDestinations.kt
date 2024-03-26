@@ -49,8 +49,6 @@ object DetailsDestination: NavDestination {
 
     val routeWithArgs = "${route}/{${contentTypeArgument}}&{${itemIdArgument}}"
     val arguments = listOf(
-        // At the beginning I was implementing this via NavType.EnumType(ContentType::class.java), but deserializing required min Api33,
-        // so I decided to work with string representations for better compatibility
         navArgument(contentTypeArgument) {type = NavType.EnumType(ContentType::class.java) },
         navArgument(itemIdArgument) {type = NavType.StringType}
     )

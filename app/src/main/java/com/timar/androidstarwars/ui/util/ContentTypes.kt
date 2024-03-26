@@ -10,12 +10,4 @@ enum class ContentType {
         StarShips -> "Star Ships"
         Planets -> "Planets"
     }
-
-    companion object {
-        fun fromString(value: String): ContentType = when (value) {
-            "Star Ships" -> StarShips
-            "Planets" -> Planets
-            else -> Characters
-        }
-    }
 }
