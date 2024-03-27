@@ -24,8 +24,8 @@ fun StarWarsNavHost(
         modifier = modifier
             .padding(
                 top = 16.dp,
-                start = 16.dp,
-                end = 16.dp
+                start = 8.dp,
+                end = 8.dp
             )
     ) {
         navigationDestiations.forEach{ destination->

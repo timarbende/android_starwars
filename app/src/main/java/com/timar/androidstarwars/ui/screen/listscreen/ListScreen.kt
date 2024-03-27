@@ -61,6 +61,9 @@ fun ListScreen(
                 text = contentType.getReadable(),
                 style = MaterialTheme.typography.displayMedium,
                 modifier = Modifier
+                    .padding(
+                        start = 8.dp
+                    )
                     .background(
                         color = when (contentType) {
                             ContentType.Characters -> MaterialTheme.colorScheme.primaryContainer

@@ -1,11 +1,15 @@
 package com.timar.androidstarwars.ui.components.listscreen
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
@@ -45,6 +49,16 @@ fun StarWarsList(
                         onListItemClick(item)
                     }
                 )
+                if(index < data.itemCount - 1){
+                    Divider(
+                        thickness = 1.dp,
+                        color = MaterialTheme.colorScheme.outline,
+                        modifier = Modifier.padding(
+                            horizontal = 12.dp,
+                            vertical = 2.dp
+                        )
+                    )
+                }
             }
         }
         item {
