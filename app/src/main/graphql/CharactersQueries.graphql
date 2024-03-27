@@ -1,0 +1,30 @@
+query AllCharacters($after: String, $before: String, $first: Int, $last: Int) {
+    allPeople(after: $after, before: $before, first: $first, last: $last) {
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
+        people {
+            id
+            name
+            filmConnection {
+                totalCount
+            }
+        }
+    }
+}
+
+query Person($personId: ID) {
+    person(id: $personId) {
+        id
+        birthYear
+        eyeColor
+        gender
+        hairColor
+        height
+        mass
+        name
+    }
+}
