@@ -1,5 +1,5 @@
 # android_starwars
-A reference book for the Star Wars universe using Jetpack Compose and the SWAPI GraphQL endpoint.
+A reference book for the Star Wars universe using Jetpack Compose and the SWAPI GraphQL endpoint. The app implements pagination with local caching by running the paginated results through a local Room database
 
 <p align="center">
 <img src="teaser_image.png" width="400" height=800>
