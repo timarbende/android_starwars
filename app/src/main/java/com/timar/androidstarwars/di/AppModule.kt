@@ -32,7 +32,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideApolloClient(): ApolloClient = ApolloClient.Builder()
-        .serverUrl("https://swapi-graphql.netlify.app/.netlify/functions/index")
+        .serverUrl("https://swapi-graphql.netlify.app/graphql")
         .build()
 
     @Provides
